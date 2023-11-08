@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>出席確認</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <div id="txt">
+        <h4>データを取得中です</h4>
+    </div>
+    <script>
+        navigator.geolocation.watchPosition((position) => {
+            var lat = position.coords.latitude;    // 緯度を取得
+            var lng = position.coords.longitude;   // 経度を取得
+            var accu = position.coords.accuracy;   // 精度を取得
+            displayData(lat, lng, accu);
+        }, (error) => {                            // エラー処理
+            var txt = document.getElementById("txt");
+            txt.innerHTML = "<h1>error : 位置情報を取得できませんでした</h1>";   // HTML
+        }, {
+            enableHighAccuracy: true   //オプション
+        });
+
+        function displayData(lat, lng, accu) {
+            const x = lat
+            const y = lng
+            var txt = document.getElementById("txt");
+                txt.innerHTML = "<h4>緯度 : " + lat + "<\h4><h4>経度 :"   // 出力
+                    + lng + "<\h4>" + "<h4>精度 : " + accu;
+        }
+    </script>
+</body>
+
+</html>
